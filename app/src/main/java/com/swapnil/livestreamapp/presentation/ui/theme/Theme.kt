@@ -1,4 +1,4 @@
-package com.swapnil.livestreamapp.ui.theme
+package com.swapnil.livestreamapp.presentation.ui.theme
 
 import android.app.Activity
 import android.os.Build
@@ -14,13 +14,14 @@ import androidx.compose.ui.platform.LocalContext
 private val DarkColorScheme = darkColorScheme(
     primary = Purple80,
     secondary = PurpleGrey80,
-    tertiary = Pink80
+    tertiary = grey,
 )
 
 private val LightColorScheme = lightColorScheme(
     primary = Purple40,
     secondary = PurpleGrey40,
-    tertiary = Pink40
+    tertiary = white,
+
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),
@@ -37,7 +38,7 @@ private val LightColorScheme = lightColorScheme(
 fun LiveStreamAppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
