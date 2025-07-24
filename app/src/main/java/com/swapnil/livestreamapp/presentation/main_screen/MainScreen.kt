@@ -31,6 +31,7 @@ import com.example.cleanarchitectureproject.presentation.main_screen.MainScreenV
 import com.example.cleanarchitectureproject.presentation.main_screen.components.navbar.BottomNavAnimation
 import com.swapnil.livestreamapp.presentation.Navbar
 import com.swapnil.livestreamapp.presentation.for_you_screen.ForYouScreen
+import com.swapnil.livestreamapp.presentation.search_screen.SearchScreen
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
@@ -148,12 +149,9 @@ fun SharedTransitionScope.MainScreen(
         else {
 
             when (isMarketScreen) {
-                "market" -> {
+                "search" -> {
                     bottomBarVisibility = true
-                   /* MarketScreen(
-                        navController = navController,
-                        animatedVisibilityScope = animatedVisibilityScope
-                    )*/
+                    SearchScreen()
                 }
 
                 "saved" -> {
@@ -215,7 +213,7 @@ fun SharedTransitionScope.MainScreen(
                             selectedTab = tab
                             when (tab) {
                                 0 -> mainScreenViewModel.toggleTab("home")
-                                1 -> mainScreenViewModel.toggleTab("market")
+                                1 -> mainScreenViewModel.toggleTab("search")
                                 2 -> mainScreenViewModel.toggleTab("saved")
                                 3 -> mainScreenViewModel.toggleTab("profile")
                             }

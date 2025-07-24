@@ -28,6 +28,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
@@ -46,7 +47,11 @@ fun UserCard(
         modifier = modifier
     ) {
         AsyncImage(
-            model = imageUrl,
+            ImageRequest.Builder(LocalContext.current)
+                .data(imageUrl)
+                .crossfade(true)
+                .size(Size.ORIGINAL)
+                .build(),
             contentDescription = name,
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize()
@@ -59,7 +64,7 @@ fun UserCard(
                 modifier = modifier
                     .background(Color.Transparent)
                     .align(Alignment.BottomCenter)
-                    .padding(bottom = 5.dp),
+                    .padding(bottom = 5.dp,end=5.dp),
                 verticalAlignment = Alignment.Bottom,
             ) {
                 // Profile Icon
@@ -92,7 +97,8 @@ fun UserCard(
                         text = name,
                         style = MaterialTheme.typography.bodySmall,
                         color = white,
-                        maxLines = 1
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
 
                     )
                   //  Spacer(modifier = Modifier.height(2.dp))
