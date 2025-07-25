@@ -18,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import com.swapnil.livestreamapp.presentation.common_components.ShimmerBrush
 
 @Composable
 fun ShimmerGrid(columnCount: Int = 2) {
@@ -33,7 +34,7 @@ fun ShimmerGrid(columnCount: Int = 2) {
                 .fillMaxWidth()
                 .height(50.dp)
                 .clip(RoundedCornerShape(6.dp))
-                .background(shimmerBrush())
+                .background(ShimmerBrush())
         ) {
 
         }
@@ -50,7 +51,7 @@ fun ShimmerGrid(columnCount: Int = 2) {
                         .fillMaxWidth()
                         .height(250.dp) // ensures square shape
                         .clip(RoundedCornerShape(6.dp))
-                        .background(shimmerBrush())
+                        .background(ShimmerBrush())
                 )
             }
         }

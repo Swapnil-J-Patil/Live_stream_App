@@ -1,4 +1,4 @@
-package com.swapnil.livestreamapp.presentation.for_you_screen.components
+package com.swapnil.livestreamapp.presentation.common_components
 
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.animateFloat
@@ -11,7 +11,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 
 @Composable
-fun shimmerBrush(): Brush {
+fun ShimmerBrush(): Brush {
     val shimmerColors = listOf(
         Color.Gray.copy(alpha = 0.6f),
         Color.LightGray.copy(alpha = 0.3f),

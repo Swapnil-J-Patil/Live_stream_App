@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -24,16 +23,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.swapnil.livestreamapp.domain.model.User
-import com.swapnil.livestreamapp.presentation.for_you_screen.components.UserCard
+import com.swapnil.livestreamapp.presentation.common_components.UserCard
 import com.swapnil.livestreamapp.presentation.ui.theme.white
 
 @Composable
 fun CategoryRow(
     modifier: Modifier = Modifier,
     users: List<User>,
-    categoryName: String
+    categoryName: String,
+    profileIconSize: Dp = 40.dp
 ) {
     val listState = rememberLazyListState()
 
@@ -90,7 +91,8 @@ fun CategoryRow(
                             scaleY = scale.value
                         ),
                     imageUrl = user.imageUrl,
-                    name = user.fullName
+                    name = user.fullName,
+                    profileIconSize = profileIconSize
                 )
             }
         }

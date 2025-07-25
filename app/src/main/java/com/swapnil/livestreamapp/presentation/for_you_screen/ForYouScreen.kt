@@ -48,7 +48,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.swapnil.livestreamapp.R
 import com.swapnil.livestreamapp.presentation.for_you_screen.components.ShimmerGrid
-import com.swapnil.livestreamapp.presentation.for_you_screen.components.UserCard
+import com.swapnil.livestreamapp.presentation.common_components.UserCard
 import com.swapnil.livestreamapp.presentation.state.UserIntent
 import com.swapnil.livestreamapp.presentation.ui.theme.white
 
