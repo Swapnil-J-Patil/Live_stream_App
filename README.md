@@ -69,6 +69,48 @@
 
 ---
 
+## 📂 Project Structure
+
+```text
+livestreamapp
+├── common
+│   ├── Constants.kt
+│   └── Resource.kt
+├── data
+│   ├── remote
+│   └── repository
+├── di
+│   └── (Dependency Injection setup)
+├── domain
+│   ├── model
+│   │   └── User.kt
+│   ├── repository
+│   │   └── UserRepository.kt
+│   └── use_case
+│       └── Users
+│           └── GetUsersUseCase.kt
+├── features
+│   └── (Optional if modularization started)
+├── presentation
+│   ├── chat_screen
+│   ├── common_components
+│   ├── for_you_screen
+│   ├── main_screen
+│   ├── match_screen
+│   ├── profile_screen
+│   ├── search_screen
+│   ├── splash_screen
+│   ├── state
+│   └── ui
+├── MainActivity.kt
+├── Navbar.kt
+├── Screen.kt
+└── SalsaApplication.kt
+
+```
+
+---
+
 ## 🚀 Getting Started
 
 ### Prerequisites  
