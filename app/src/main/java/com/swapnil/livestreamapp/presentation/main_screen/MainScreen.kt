@@ -27,10 +27,12 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.example.cleanarchitectureproject.presentation.main_screen.MainScreenViewModel
 import com.example.cleanarchitectureproject.presentation.main_screen.components.navbar.BottomNavAnimation
 import com.swapnil.livestreamapp.presentation.Navbar
+import com.swapnil.livestreamapp.presentation.chat_screen.ChatScreen
 import com.swapnil.livestreamapp.presentation.for_you_screen.ForYouScreen
+import com.swapnil.livestreamapp.presentation.match_screen.MatchScreen
+import com.swapnil.livestreamapp.presentation.profile_screen.ProfileScreen
 import com.swapnil.livestreamapp.presentation.search_screen.SearchScreen
 
 @OptIn(ExperimentalSharedTransitionApi::class)
@@ -40,8 +42,8 @@ fun SharedTransitionScope.MainScreen(
     mainScreenViewModel: MainScreenViewModel = hiltViewModel(),
     animatedVisibilityScope: AnimatedVisibilityScope,
     isDarkTheme: Boolean,
-    onToggle:()->Unit,
-    onLogout:() -> Unit
+    onToggle: () -> Unit,
+    onLogout: () -> Unit
 ) {
     val screen = listOf(
         Navbar.ForYou,
@@ -54,173 +56,80 @@ fun SharedTransitionScope.MainScreen(
     val configuration = LocalConfiguration.current
     val isTab = configuration.screenWidthDp.dp > 600.dp
 
-    var selectedTab by rememberSaveable(stateSaver = Saver(
+    var selectedTab by rememberSaveable(
+        stateSaver = Saver(
         save = { it },
         restore = { it }
     )) { mutableStateOf(0) }
     var bottomBarVisibility by remember { mutableStateOf(true) }
     val isMarketScreen by mainScreenViewModel.currentTab.collectAsState()
-
+    var isChatClicked by remember { mutableStateOf(false) }
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
-        if (isTab) {
-            when (isMarketScreen) {
-                "market" -> {
-                    bottomBarVisibility = true
-                   /* MarketScreenTab(
-                        navController = navController,
-                        animatedVisibilityScope = animatedVisibilityScope
-                    )*/
-                }
-
-                "saved" -> {
-                   /* SavedCoinsScreenTab(
-                        navController = navController,
-                        animatedVisibilityScope = animatedVisibilityScope
-                    )*/
-                }
-
-                "profile" -> {
-                   /* ProfileScreenTab(
-                        navController,
-                        animatedVisibilityScope = animatedVisibilityScope,
-                        context = LocalContext.current,
-                        isDarkTheme = isDarkTheme, onToggle = {
-                            onToggle()
-                        },
-                        onLogout = {
-                             navController.navigate(Screen.AuthScreen.route) {
-                                    popUpTo(Screen.MainScreen.route) { inclusive = true }
-                                }
-                            onLogout()
-                        }
-                    )*/
-                }
-
-                else -> {
-                    bottomBarVisibility = true
-                   /* HomeScreenTab(
-                        navController = navController,
-                        animatedVisibilityScope = animatedVisibilityScope
-                    )*/
-                    ForYouScreen()
-                }
-            }
-            Box(
-                modifier = Modifier
-                    .fillMaxSize(),
-                contentAlignment = Alignment.CenterStart
-            ) {
-                AnimatedVisibility(
-                    visible = bottomBarVisibility,
-                    enter = fadeIn(
-                        animationSpec = tween(
-                            durationMillis = 600,
-                            easing = FastOutSlowInEasing
-                        )
-                    ),
-                    exit = fadeOut(
-                        animationSpec = tween(
-                            durationMillis = 600,
-                            easing = FastOutSlowInEasing
-                        )
-                    )
-                ) {
-                    BottomNavAnimation(
-                        screens = screen,
-                        isTab = isTab,
-                        selectedTab = selectedTab,  // Pass selectedTab
-                        onClick = { tab ->
-                            selectedTab = tab
-                            when (tab) {
-                                0 -> mainScreenViewModel.toggleTab("home")
-                                1 -> mainScreenViewModel.toggleTab("market")
-                                2 -> mainScreenViewModel.toggleTab("saved")
-                                3 -> mainScreenViewModel.toggleTab("profile")
-                            }
-                        }
-                    )
-                }
+        when (isMarketScreen) {
+            "search" -> {
+                SearchScreen()
             }
 
+            "match" -> {
+                MatchScreen()
+            }
+
+            "profile" -> {
+                ProfileScreen()
+            }
+
+            "chat" -> {
+                ChatScreen()
+            }
+
+            else -> {
+
+                ForYouScreen()
+            }
         }
-        else {
-
-            when (isMarketScreen) {
-                "search" -> {
-                    bottomBarVisibility = true
-                    SearchScreen()
-                }
-
-                "saved" -> {
-                    /*SavedCoinsScreen(
-                        navController = navController,
-                        animatedVisibilityScope = animatedVisibilityScope
-                    )*/
-                }
-
-                "profile" -> {
-                   /* ProfileScreen(
-                        navController,
-                        animatedVisibilityScope = animatedVisibilityScope,
-                        context = LocalContext.current,
-                        isDarkTheme = isDarkTheme, onToggle = {
-                            onToggle()
-                        },
-                        onLogout = {
-                            navController.navigate(Screen.AuthScreen.route) {
-                                   popUpTo(Screen.MainScreen.route) { inclusive = true }
-                               }
-                            onLogout()
-                        }
-                    )*/
-                }
-                else -> {
-                   /* HomeScreen(
-                        navController = navController,
-                        animatedVisibilityScope = animatedVisibilityScope
-                    )*/
-                    ForYouScreen()
-                }
-            }
-            Box(
-                modifier = Modifier
-                    .fillMaxSize(),
-                contentAlignment = Alignment.BottomCenter
+        Box(
+            modifier = Modifier
+                .fillMaxSize(),
+            contentAlignment = Alignment.BottomCenter
+        ) {
+            AnimatedVisibility(
+                visible = bottomBarVisibility,
+                enter = fadeIn(
+                    animationSpec = tween(
+                        durationMillis = 600,
+                        easing = FastOutSlowInEasing
+                    )
+                ),
+                exit = fadeOut(
+                    animationSpec = tween(
+                        durationMillis = 600,
+                        easing = FastOutSlowInEasing
+                    )
+                )
             ) {
-                AnimatedVisibility(
-                    visible = bottomBarVisibility,
-                    enter = fadeIn(
-                        animationSpec = tween(
-                            durationMillis = 600,
-                            easing = FastOutSlowInEasing
-                        )
-                    ),
-                    exit = fadeOut(
-                        animationSpec = tween(
-                            durationMillis = 600,
-                            easing = FastOutSlowInEasing
-                        )
-                    )
-                ) {
-                    BottomNavAnimation(
-                        screens = screen,
-                        isTab = isTab,
-                        selectedTab = selectedTab,  // Pass selectedTab
-                        onClick = { tab ->
-                            selectedTab = tab
-                            when (tab) {
-                                0 -> mainScreenViewModel.toggleTab("home")
-                                1 -> mainScreenViewModel.toggleTab("search")
-                                2 -> mainScreenViewModel.toggleTab("saved")
-                                3 -> mainScreenViewModel.toggleTab("profile")
-                            }
+                BottomNavAnimation(
+                    screens = screen,
+                    selectedTab = selectedTab,  // Pass selectedTab
+                    onClick = { tab ->
+                        selectedTab = tab
+                        when (tab) {
+                            0 -> mainScreenViewModel.toggleTab("for_you")
+                            1 -> mainScreenViewModel.toggleTab("search")
+                            2 -> {
+                                mainScreenViewModel.toggleTab("chat")
+                                isChatClicked = true}
+                            3 -> mainScreenViewModel.toggleTab("match")
+                            4 -> mainScreenViewModel.toggleTab("profile")
+
                         }
-                    )
-                }
+                    },
+                    isChatClicked=isChatClicked
+                )
             }
+
         }
     }
 }

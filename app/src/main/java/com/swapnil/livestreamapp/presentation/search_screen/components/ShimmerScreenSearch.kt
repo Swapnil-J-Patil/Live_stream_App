@@ -15,6 +15,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -30,10 +31,12 @@ fun ShimmerScreenSearch() {
         modifier = Modifier
             .fillMaxSize()
             .padding(top = 45.dp, bottom = 70.dp)
+            .background(color = MaterialTheme.colorScheme.surface)
     ) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
+                .height(80.dp)
                 .padding(start = 10.dp, end = 10.dp, bottom = 20.dp)
                 .clip(RoundedCornerShape(30.dp))
                 .background(
@@ -42,7 +45,10 @@ fun ShimmerScreenSearch() {
         )
         Box(
             Modifier
+                .width(100.dp)
+                .height(30.dp)
                 .padding(start = 10.dp, bottom = 15.dp)
+                .clip(RoundedCornerShape(10.dp))
                 .background(ShimmerBrush())
         )
 
@@ -58,12 +64,16 @@ fun ShimmerScreenSearch() {
 
 @Composable
 fun ShimmerCategoryRow(modifier: Modifier = Modifier) {
-    Box(modifier=Modifier.padding(bottom=6.dp).background(ShimmerBrush()))
+    Box(modifier=Modifier
+        .width(50.dp)
+        .height(20.dp).padding(bottom=10.dp)
+        .clip(RoundedCornerShape(10.dp))
+        .background(ShimmerBrush()))
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(4.dp),
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 0.dp)
+            .padding(horizontal = 0.dp, vertical = 10.dp)
     ) {
         items(10) { // number of placeholders
             Box(

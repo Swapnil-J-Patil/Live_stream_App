@@ -1,4 +1,4 @@
-package com.example.cleanarchitectureproject.presentation.main_screen
+package com.swapnil.livestreamapp.presentation.main_screen
 
 import android.util.Log
 import androidx.compose.runtime.State
@@ -17,7 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MainScreenViewModel @Inject constructor() : ViewModel() {
 
-    private val _currentTab = MutableStateFlow("For You")
+    private val _currentTab = MutableStateFlow("for_you")
     val currentTab: StateFlow<String> = _currentTab
 
     fun toggleTab(tab: String) {

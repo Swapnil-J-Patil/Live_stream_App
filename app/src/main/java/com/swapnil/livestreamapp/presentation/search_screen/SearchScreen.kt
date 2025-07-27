@@ -51,7 +51,7 @@ fun SearchScreen(
     }
 
     when {
-        state.isLoading -> {
+        state.isLoading|| state.users.isEmpty()  -> {
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                 ShimmerScreenSearch()
             }
@@ -79,20 +79,20 @@ fun SearchScreen(
                         .clip(RoundedCornerShape(30.dp))
                         .background(
                             shape = RoundedCornerShape(30.dp),
-                            color = Color.Black.copy(alpha = 0.3f)
+                            color = MaterialTheme.colorScheme.secondary.copy(alpha = 0.1f)
                         ),
                     shape = RoundedCornerShape(30.dp),
                     placeholder = {
                         Text(
                             text = "Search",
-                            color = Color.LightGray.copy(alpha = 0.3f),
+                            color = MaterialTheme.colorScheme.secondary.copy(alpha = 0.3f),
                             style = MaterialTheme.typography.bodyLarge
                         )
                     },
                     leadingIcon = {
                         Icon(
                             Icons.Default.Search,
-                            tint = Color.LightGray.copy(alpha = 0.3f),
+                            tint = MaterialTheme.colorScheme.secondary.copy(alpha = 0.3f),
                             modifier = Modifier
                                 .padding(start = 15.dp)
                                 .size(25.dp),
@@ -115,7 +115,7 @@ fun SearchScreen(
                     text = "Recommended",
                     style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.Normal,
-                    color = Color.LightGray.copy(alpha = 0.3f),
+                    color = MaterialTheme.colorScheme.secondary.copy(alpha = 0.3f),
                     modifier = Modifier.padding(start = 10.dp, bottom = 15.dp)
                 )
                 Column(

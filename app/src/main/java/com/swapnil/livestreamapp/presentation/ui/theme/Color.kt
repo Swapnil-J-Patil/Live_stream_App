@@ -14,3 +14,5 @@ val orangeDark = Color(0xFFD53C0B)
 val lightBackground = Color(0xFFECEAEA) // Pure white
 val grey = Color(0xFF232424)// Neutral slate-grey for subtle contrast with green and black text.
 val white= Color(0xFFFFFFFF)
+val lightGrey = Color(0x40888686) // Pure white
+

@@ -64,14 +64,14 @@ fun ForYouScreen(
     }
 
     when {
-        state.isLoading -> {
+        state.isLoading || state.users.isEmpty()  -> {
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                 ShimmerGrid(columnCount = 2)
             }
         }
 
         state.error != null -> {
-            Text("Error: ${state.error}", color = Color.Red)
+            ShimmerGrid(columnCount = 2)
         }
 
         else -> {
@@ -103,18 +103,18 @@ fun ForYouScreen(
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
                             text = "260",
-                            style = MaterialTheme.typography.bodySmall,
-                            fontWeight = FontWeight.Bold,
-                            color = white,
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = MaterialTheme.colorScheme.secondary,
                             modifier = Modifier
                         )
                         Spacer(modifier = Modifier.width(15.dp))
                         Icon(
                             imageVector = Icons.Default.Add,
                             contentDescription = "Add coin",
+                            tint = MaterialTheme.colorScheme.tertiary,
                             modifier = Modifier.size(25.dp)
                                 .clip(CircleShape)
-                                .background(color = white, shape = CircleShape)
+                                .background(color = MaterialTheme.colorScheme.secondary, shape = CircleShape)
                                 .padding(3.dp)
                         )
                     }
@@ -129,7 +129,7 @@ fun ForYouScreen(
                             .clip(RoundedCornerShape(12.dp))
                             .background(shape = RoundedCornerShape(12.dp), brush =
                                 Brush.verticalGradient(
-                                    listOf(Color(0xFFFF5722), Color(0xFFFF9800)),
+                                    listOf(Color(0xFFE0331A), Color(0xFFFF9800)),
                                 )
 
                             )
@@ -137,6 +137,7 @@ fun ForYouScreen(
 
                     )
                 }
+                Spacer(Modifier.height(10.dp))
                 LazyVerticalGrid(
                     columns = GridCells.Fixed(2),
                     state = listState,

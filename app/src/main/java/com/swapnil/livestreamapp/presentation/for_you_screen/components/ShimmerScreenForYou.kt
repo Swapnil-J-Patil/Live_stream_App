@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -25,6 +26,7 @@ fun ShimmerGrid(columnCount: Int = 2) {
     Column(
         modifier = Modifier.fillMaxSize()
             .padding(top=45.dp, bottom = 70.dp)
+            .background(color = MaterialTheme.colorScheme.surface)
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,

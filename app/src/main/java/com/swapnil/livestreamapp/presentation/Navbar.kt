@@ -16,10 +16,12 @@ import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.BarChart
 import androidx.compose.material.icons.outlined.Bookmark
 import androidx.compose.material.icons.outlined.CandlestickChart
+import androidx.compose.material.icons.outlined.Chat
 import androidx.compose.material.icons.outlined.ChatBubble
 import androidx.compose.material.icons.outlined.Create
 import androidx.compose.material.icons.outlined.Explore
 import androidx.compose.material.icons.outlined.Favorite
+import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.InsertChart
 import androidx.compose.material.icons.outlined.Person
@@ -32,10 +34,10 @@ sealed class Navbar(
     val activeIcon: ImageVector,
     val inactiveIcon: ImageVector
 ) {
-    object ForYou: Navbar("For You", Icons.Filled.Explore, Icons.Outlined.Explore)
+    object ForYou: Navbar("For you", Icons.Filled.Explore, Icons.Outlined.Explore)
     object Search: Navbar("Search", Icons.Filled.Search, Icons.Outlined.Search)
-    object Chat: Navbar("Chat", Icons.Filled.ChatBubble, Icons.Outlined.ChatBubble)
-    object Match: Navbar("Match", Icons.Filled.Favorite, Icons.Outlined.Favorite)
+    object Chat: Navbar("Chat", Icons.Filled.ChatBubble, Icons.Outlined.Chat)
+    object Match: Navbar("Match", Icons.Filled.Favorite, Icons.Outlined.FavoriteBorder)
     object Profile: Navbar("Profile", Icons.Filled.Person, Icons.Outlined.Person)
 
 }

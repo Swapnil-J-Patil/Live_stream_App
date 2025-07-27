@@ -84,7 +84,7 @@ fun SplashScreen(navController: NavController,context: Context) {
                 .clip(CircleShape)
                 .background(
                     brush = Brush.radialGradient(
-                        colors = if (flag) listOf(Color(0xFFFF5722), Color(0xFF751F04)) else listOf(
+                        colors = if (flag) listOf(Color(0xFFFF5722), Color(0xFF5D1802)) else listOf(
                             Color.Transparent,
                             Color.Transparent
                         ),

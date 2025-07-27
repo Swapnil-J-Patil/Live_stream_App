@@ -19,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.graphicsLayer
@@ -45,7 +46,7 @@ fun CategoryRow(
             text = categoryName,
             style = MaterialTheme.typography.bodyMedium,
             fontWeight = FontWeight.Bold,
-            color = white,
+            color = MaterialTheme.colorScheme.secondary,
             modifier=Modifier.padding(bottom=6.dp)
         )
         LazyRow(
@@ -92,7 +93,10 @@ fun CategoryRow(
                         ),
                     imageUrl = user.imageUrl,
                     name = user.fullName,
-                    profileIconSize = profileIconSize
+                    profileIconSize = profileIconSize,
+                    style = MaterialTheme.typography.bodySmall,
+                    diamondSize = 15.dp,
+                    viewsAlignment = Alignment.TopEnd
                 )
             }
         }
