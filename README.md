@@ -1,4 +1,4 @@
-# 📺 Salsa - Live Streaming App
+# 📱 Salsa - Live Streaming App
 
 **Salsa** is a beautifully crafted **live streaming app** built with **Jetpack Compose** and powered by modern Android development principles like **Clean Architecture**, **Hilt**, and **Retrofit**. With smooth UI animations, dark/light theme support, and an engaging profile screen, Salsa offers both performance and elegance.
 
