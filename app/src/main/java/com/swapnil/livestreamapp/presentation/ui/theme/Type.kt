@@ -10,6 +10,7 @@ import com.swapnil.livestreamapp.R
 
 // Set of Material typography styles to start with
 val Poppins = FontFamily(Font(R.font.poppins))
+val Flame = FontFamily(Font(R.font.inferno))
 
 val Typography = Typography(
     bodyLarge = TextStyle(

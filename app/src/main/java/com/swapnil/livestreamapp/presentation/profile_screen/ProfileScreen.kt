@@ -1,11 +1,17 @@
 package com.swapnil.livestreamapp.presentation.profile_screen
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -59,7 +65,9 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.swapnil.livestreamapp.R
 import com.swapnil.livestreamapp.presentation.common_components.UserCard
+import com.swapnil.livestreamapp.presentation.profile_screen.components.CounterColumn
 import com.swapnil.livestreamapp.presentation.profile_screen.components.ShimmerProfileScreen
+import com.swapnil.livestreamapp.presentation.profile_screen.components.animateCounter
 import com.swapnil.livestreamapp.presentation.search_screen.components.ShimmerScreenSearch
 import com.swapnil.livestreamapp.presentation.state.UserIntent
 import com.swapnil.livestreamapp.presentation.ui.theme.white
@@ -71,6 +79,11 @@ fun ProfileScreen(
 ) {
     val state by profileScreenViewModel.state.collectAsState()
     val listState = rememberLazyGridState()
+    val earned = animateCounter(target = 34)
+    val followers = animateCounter(target = 260)
+    val following = animateCounter(target = 260)
+    var isOfferVisible by remember { mutableStateOf(true) }
+
     LaunchedEffect(Unit) {
         profileScreenViewModel.handleIntent(UserIntent.LoadUsers)
     }
@@ -200,78 +213,11 @@ fun ProfileScreen(
                             Row(
                                 modifier = Modifier.padding(top = 10.dp)
                             ) {
-                                Column(
-                                    verticalArrangement = Arrangement.Center,
-                                    horizontalAlignment = Alignment.CenterHorizontally
-                                ) {
-                                    Text(
-                                        text = "34",
-                                        style = MaterialTheme.typography.titleLarge,
-                                        color = MaterialTheme.colorScheme.secondary,
-                                    )
-
-                                    Row(
-                                        verticalAlignment = Alignment.CenterVertically,
-                                        horizontalArrangement = Arrangement.Center
-                                    ) {
-                                        Image(
-                                            painter = painterResource(id = R.drawable.diamond),
-                                            contentDescription = "diamond",
-                                            contentScale = ContentScale.Crop,
-                                            modifier = Modifier.size(20.dp)
-                                        )
-                                        Spacer(modifier = Modifier.width(4.dp))
-                                        androidx.compose.material3.Text(
-                                            text = "Earned",
-                                            style = MaterialTheme.typography.bodySmall,
-                                            color = MaterialTheme.colorScheme.secondary,
-                                        )
-                                    }
-                                }
+                                CounterColumn(title = earned, label = "Earned", iconRes = R.drawable.diamond)
                                 Spacer(modifier = Modifier.width(20.dp))
-                                Column(
-                                    verticalArrangement = Arrangement.Center,
-                                    horizontalAlignment = Alignment.CenterHorizontally
-                                ) {
-                                    Text(
-                                        text = "260",
-                                        style = MaterialTheme.typography.titleLarge,
-                                        color = MaterialTheme.colorScheme.secondary,
-                                    )
-
-                                    Row(
-                                        verticalAlignment = Alignment.CenterVertically,
-                                        horizontalArrangement = Arrangement.Center
-                                    ) {
-                                        Text(
-                                            text = "Followers",
-                                            style = MaterialTheme.typography.bodySmall,
-                                            color = MaterialTheme.colorScheme.secondary,
-                                        )
-                                    }
-                                }
+                                CounterColumn(title = followers, label = "Followers")
                                 Spacer(modifier = Modifier.width(20.dp))
-                                Column(
-                                    verticalArrangement = Arrangement.Center,
-                                    horizontalAlignment = Alignment.CenterHorizontally
-                                ) {
-                                    Text(
-                                        text = "260",
-                                        style = MaterialTheme.typography.titleLarge,
-                                        color = MaterialTheme.colorScheme.secondary,
-                                    )
-
-                                    Row(
-                                        verticalAlignment = Alignment.CenterVertically,
-                                        horizontalArrangement = Arrangement.Center
-                                    ) {
-                                        Text(
-                                            text = "Following",
-                                            style = MaterialTheme.typography.bodySmall,
-                                            color = MaterialTheme.colorScheme.secondary,
-                                        )
-                                    }
-                                }
+                                CounterColumn(title = following, label = "Following")
                             }
 
                         }
@@ -323,90 +269,100 @@ fun ProfileScreen(
                 }
 
                 Spacer(modifier = Modifier.height(10.dp))
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clip(RoundedCornerShape(8.dp))
-                        .background(
-                            color = MaterialTheme.colorScheme.tertiary,
-                            shape = RoundedCornerShape(8.dp)
-                        )
-                        .border(
-                            width = 1.dp,
-                            color = MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.3f),
-                            shape = RoundedCornerShape(8.dp)
-                        )
-                        .padding(horizontal = 8.dp, vertical = 10.dp)
-                    ,
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween
+                AnimatedVisibility(
+                    visible = isOfferVisible,
+                    enter = fadeIn() + expandVertically(),
+                    exit = fadeOut() + shrinkVertically()
                 ) {
                     Row(
-                        modifier = Modifier.padding(start = 12.dp),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clip(RoundedCornerShape(8.dp))
+                            .background(
+                                color = MaterialTheme.colorScheme.tertiary,
+                                shape = RoundedCornerShape(8.dp)
+                            )
+                            .border(
+                                width = 1.dp,
+                                color = MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.3f),
+                                shape = RoundedCornerShape(8.dp)
+                            )
+                            .padding(horizontal = 8.dp, vertical = 10.dp),
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.Center
+                        horizontalArrangement = Arrangement.SpaceBetween
                     ) {
+                        Row(
+                            modifier = Modifier.padding(start = 12.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.Center
+                        ) {
 
-                        Text(
-                            text = "Earn",
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.secondary,
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis
-                        )
-                        Spacer(modifier = Modifier.width(4.dp))
+                            Text(
+                                text = "Earn",
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.secondary,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis
+                            )
+                            Spacer(modifier = Modifier.width(4.dp))
 
-                        Image(
-                            painter = painterResource(id = R.drawable.diamond),
-                            contentDescription = "diamond",
-                            contentScale = ContentScale.Crop,
-                            modifier = Modifier.size(20.dp)
-                        )
-                        Spacer(modifier = Modifier.width(4.dp))
-                        Text(
-                            text = "500 more to redeem $15",
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.secondary,
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis
-                        )
-                        Spacer(modifier = Modifier.width(10.dp))
-                        Text(
-                            text = "Go Live",
-                            style = MaterialTheme.typography.titleSmall,
-                            textAlign = TextAlign.Center,
-                            color = white,
-                            modifier = Modifier
-                                .width(80.dp)
-                                .clip(RoundedCornerShape(8.dp))
-                                .background(
-                                    shape = RoundedCornerShape(8.dp), brush =
-                                        Brush.verticalGradient(
-                                            listOf(Color(0xFFE0331A), Color(0xFFE45F0F)),
-                                        )
+                            Image(
+                                painter = painterResource(id = R.drawable.diamond),
+                                contentDescription = "diamond",
+                                contentScale = ContentScale.Crop,
+                                modifier = Modifier.size(20.dp)
+                            )
+                            Spacer(modifier = Modifier.width(4.dp))
+                            Text(
+                                text = "500 more to redeem $15",
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.secondary,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis
+                            )
+                            Spacer(modifier = Modifier.width(10.dp))
+                            Text(
+                                text = "Go Live",
+                                style = MaterialTheme.typography.titleSmall,
+                                textAlign = TextAlign.Center,
+                                color = white,
+                                modifier = Modifier
+                                    .width(80.dp)
+                                    .clip(RoundedCornerShape(8.dp))
+                                    .background(
+                                        shape = RoundedCornerShape(8.dp), brush =
+                                            Brush.verticalGradient(
+                                                listOf(Color(0xFFE0331A), Color(0xFFE45F0F)),
+                                            )
 
-                                )
-                                .padding(6.dp)
+                                    )
+                                    .padding(6.dp)
 
-                        )
-                    }
-                    Spacer(Modifier.width(5.dp))
+                            )
+                        }
+                        Spacer(Modifier.width(5.dp))
 
                         Icon(
                             imageVector = Icons.Default.Close,
                             contentDescription = "Close coin",
                             tint = MaterialTheme.colorScheme.tertiary,
                             modifier = Modifier
+
                                 .size(20.dp)
                                 .clip(CircleShape)
+                                .clickable {
+                                    isOfferVisible=false
+                                }
                                 .background(
                                     color = MaterialTheme.colorScheme.tertiaryContainer.copy(
-                                        alpha = 0.3f
+                                        alpha = 0.5f
                                     ), shape = CircleShape
                                 )
                                 .padding(3.dp)
+
                         )
 
+                    }
                 }
                 Spacer(Modifier.height(10.dp))
                 LazyVerticalGrid(
