@@ -41,9 +41,6 @@ fun SharedTransitionScope.MainScreen(
     navController: NavController,
     mainScreenViewModel: MainScreenViewModel = hiltViewModel(),
     animatedVisibilityScope: AnimatedVisibilityScope,
-    isDarkTheme: Boolean,
-    onToggle: () -> Unit,
-    onLogout: () -> Unit
 ) {
     val screen = listOf(
         Navbar.ForYou,

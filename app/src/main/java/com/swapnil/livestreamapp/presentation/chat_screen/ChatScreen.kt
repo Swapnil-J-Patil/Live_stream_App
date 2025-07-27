@@ -36,7 +36,7 @@ fun ChatScreen(modifier: Modifier = Modifier) {
             painter = painterResource(id = R.drawable.profile_img),
             contentDescription = "offline",
             modifier = Modifier
-                .size(200.dp) // Ensure image is smaller than the border container
+                .size(200.dp)
                 .padding(6.dp)
                 .clip(CircleShape)
                 .background(Color.Transparent),

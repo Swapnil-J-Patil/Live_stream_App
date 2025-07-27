@@ -106,7 +106,7 @@ fun UserCard(
                         )
                     }
 
-                    Spacer(modifier = Modifier.width(2.dp)) // Space between icon and text
+                    Spacer(modifier = Modifier.width(2.dp))
 
                     // Text Column
                     Column(

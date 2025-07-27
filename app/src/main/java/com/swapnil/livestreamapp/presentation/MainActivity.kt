@@ -50,24 +50,8 @@ class MainActivity : ComponentActivity() {
                             popEnterTransition = { EnterTransition.None },
                             popExitTransition = { ExitTransition.None }
                         ) {
-                            MainScreen(navController, animatedVisibilityScope = this,
-                                isDarkTheme = true, onToggle = {
-
-                                },
-                                onLogout = {
-                                    /*navController.navigate(Screen.AuthScreen.route) {
-                                        popUpTo(Screen.MainScreen.route) { inclusive = true }
-                                    }*/
-                                    //val context = LocalContext.current
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-                                    finish()
-                                    startActivity(intent)
-
-                                })
-
+                            MainScreen(navController=navController, animatedVisibilityScope = this,)
                         }
-
-
 
                     }
                 }
