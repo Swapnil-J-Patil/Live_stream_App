@@ -36,12 +36,17 @@
 
 ---
 
-## 🔗 APK Link:
+## 🔗 Links:
+
+App Link:
 
 https://drive.google.com/file/d/1Y5ixgcR-Q8prLCSzXU2FuUlCbiV7v1zF/view?usp=drivesdk
 
----
+User Manual:
 
+https://docs.google.com/document/d/1IwDiksWDyFaOv3QnDE1tHlzr68XxKgP4/edit?usp=sharing&ouid=108343340253804939269&rtpof=true&sd=true
+
+---
 ## 🚀 Features
 
 - ✨ **User Image Animation** — Dynamic transitions to bring your profile to life
