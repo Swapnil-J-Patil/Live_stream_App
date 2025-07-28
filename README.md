@@ -100,8 +100,6 @@ livestreamapp
 │   └── use_case
 │       └── Users
 │           └── GetUsersUseCase.kt
-├── features
-│   └── (Optional if modularization started)
 ├── presentation
 │   ├── chat_screen
 │   ├── common_components
